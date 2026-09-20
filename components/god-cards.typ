@@ -1,7 +1,7 @@
 
+#import "button.typ" :*
 
-
-#let player-card(god) = {
+#let player-card(god, number:none) = {
   stack(
   dir: ltr,
 
@@ -14,7 +14,11 @@
       stack(
       dir: ttb,
       figure(
-        image("./img/" + god + ".png", width: 20%)
+        
+        image(
+          "./img/" + god + ".png",
+          height:  30%,
+           )
       ),
       [#god],
     )
@@ -44,29 +48,38 @@ box(
 stack(
   dir: ttb,
 
+  button(
+    <character-select>,
+    [Stay Silent],
+    fillColor: red
+  )
+  ,
+
+if number != none {
   grid(
-  columns: (1fr, 1fr, 1fr),
-  gutter: 10pt,
-  align: center + horizon,
-  fill: red,
-  
-
-  [Stay Silent],
-  [Yap to Neighbour],
-  [Admire Surroundings],
-),
-
-grid(
-  columns: 13,
+  columns: 3,
   gutter:  4pt,
   align: center,
 
-  ..range(1, 22).map(i => [#i])
+  ..range(1, 4).map(i => {
+    if number + i <= 21 {
+    button(
+    label(god + "number" + str(number + i)),
+    [
+      #{number + i}
+       ],
+    fillColor: gray
+  )
+    }
+
+  }
 )
 
 
 )
-)
-)
 
+}
+)
+)
+  )
 }

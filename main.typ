@@ -1,6 +1,7 @@
 
 #set page(
   paper: "iso-b7",
+  flipped: true,
   number-align: center,
 )
 

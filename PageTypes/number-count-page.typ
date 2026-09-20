@@ -1,31 +1,61 @@
 #import "../components/components-lib.typ" : *
 
+#let four-squares() = {
+place(
+    top + left,
+  )[
+    #god-square("Athena")
+  ]
+
+  place(
+    top + right,
+  )[
+    #god-square("Ares")
+  ]
+
+  place(
+    top + right,
+    dy: 30%
+  )[
+    #god-square("Artemis")
+  ]
+
+  place(
+    top + left,
+    dy: 30%
+  )[
+    #god-square("Zeus")
+  ]
+}
+
 #let number-count-page(god, number) = {
   pagebreak()
   align(center)[=  #god #label(god + "number" + str(number))] 
 
+  align(center)[
+    #image(
+    "../components/img/Dionysus.png",
+    height: 50%
+    )
+  ]
+
+  if number == 21 {
+    align(center)[= DRINK!]
+  } else {
+    four-squares()
+  }
+
+
+  if number != 21 {
   place(bottom,
     
-    player-card(god)
+    player-card(god, number: number)
     
     )
-
-
-  if number < 21 {
- 
-  for i in range(1, 3, inclusive: true) {
-    let no = number + i
-    if no <= 21 {
-      button(
-        label(god + "number" + str(no)),
-        [#no],
-        fillColor:blue
-      )
-
-    }
-  } 
  
   } 
+
+}
 
   if number == 21 {
     align(

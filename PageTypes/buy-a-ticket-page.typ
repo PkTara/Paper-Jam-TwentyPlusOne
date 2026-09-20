@@ -1,8 +1,12 @@
 #import "../components/button.typ":*
+#import "../components/page-label.typ":*
 
 #let buy-a-ticket() = {
   pagebreak()
-[= Buy a ticket? <buy-a-ticket> ]
+
+  page-label("buy-a-ticket")
+
+[= Buy a ticket?  ]
 
 button(
   <character-select>,
