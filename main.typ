@@ -6,33 +6,24 @@
 
 #import "PageTypes/page-type-lib.typ" : *
 
-#import "components/god-cards.typ": player-card
-#import "components/gods-select.typ": god-table
+#first-page()
 
-#import "components/backgrounds/olympus.typ": olympus-background
+#buy-a-ticket()
+#lose-hermit-page()
+#lose-coursework-page()
 
-// #set page(
-//     background: olympus-background()
-// )
-
-#align(center)[= CHARACTER SELECT #label("character-select")]
 
 #let greek_gods = ("Zeus", "Athena", "Artemis", "Ares")
-
-#god-table(greek_gods)
-
-
+#character-select-page(greek_gods)
 
 #{
 for god in greek_gods {
-
 
   character-confirmed-page(god)
 
   for i in range(21, inclusive: true) {
     number-count-page(god, i)
   }
-    
     
 }
 }
