@@ -1,3 +1,5 @@
+#import "url-generator.typ" : *
+
 
 #let god-table(greek_gods) = {
   table(
@@ -5,7 +7,9 @@
 
     ..greek_gods.map(god => 
     link(
-      label("character=" + god),
+      label(url-generator(
+        players_character: god
+      )),
        box(
       
       [
@@ -25,4 +29,4 @@
 )
   )
 
-}
+}

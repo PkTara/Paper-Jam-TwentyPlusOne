@@ -25,7 +25,12 @@ for god in greek_gods {
   character-confirmed-page(god)
 
   for i in range(21, inclusive: true) {
-    number-count-page(god, i)
+    for current_player in greek_gods {
+      for direction in ("left", "right") {
+       number-count-page(god, i, direction, current_player)
+      }
+
+    }
   }
     
 }

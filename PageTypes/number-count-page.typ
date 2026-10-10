@@ -1,36 +1,35 @@
 #import "../components/components-lib.typ" : *
 
-#let four-squares() = {
-place(
-    top + left,
-  )[
-    #god-square("Athena")
-  ]
+#let four-squares(number, current_player, direction) = {
+  let places = (
+    ("Athena", top + left, 0%),
+    ("Ares", top + right, 0%),
+    ("Artemis", top + left, 30%),
+    ("Poseidon", top + right, 30%)
+  )
 
-  place(
-    top + right,
-  )[
-    #god-square("Ares")
-  ]
-
-  place(
-    top + right,
-    dy: 30%
-  )[
-    #god-square("Artemis")
-  ]
-
-  place(
-    top + left,
-    dy: 30%
-  )[
-    #god-square("Zeus")
-  ]
+  for (god, quadrant, percent) in places {
+    place(
+      quadrant,
+      dy: percent
+    )[
+      #god-square(god)
+      #if god == current_player [#number]
+    ]
+  }
 }
 
-#let number-count-page(god, number) = {
+
+#let number-count-page(god, number, direction, current_player) = {
   pagebreak()
-  align(center)[=  #god #label(god + "number" + str(number))] 
+  align(center)[=  #god #label(url-generator(
+    players_character: god,
+    current_player: current_player,
+    direction: direction,
+    number: number
+  )
+  ) 
+  ]
 
   align(center)[
     #image(
@@ -42,31 +41,17 @@ place(
   if number == 21 {
     align(center)[= DRINK!]
   } else {
-    four-squares()
+    four-squares(number, current_player, direction)
   }
 
 
   if number != 21 {
   place(bottom,
     
-    player-card(god, number: number)
+    player-card(god, number: number, direction: direction, current_player: current_player)
     
     )
  
   } 
-
-}
-
-  if number == 21 {
-    align(
-      center,
-    )[
-      Uh oh, you reached 21
-      
-      = DRINK!
-      
-      ]
-  }
-  }
 
 }

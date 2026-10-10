@@ -1,7 +1,8 @@
 
 #import "button.typ" :*
+#import "url-generator.typ" : *
 
-#let player-card(god, number:none) = {
+#let player-card(god, number:none, direction:none, current_player:none) = {
   stack(
   dir: ltr,
 
@@ -64,12 +65,20 @@ if number != none {
   ..range(1, 4).map(i => {
     if number + i <= 21 {
     button(
-    label(god + "number" + str(number + i)),
+    label(
+      url-generator(
+        players_character: god,
+        current_player: current_player,
+        direction: direction,
+        number: number + i
+      )
+      ),
     [
       #{number + i}
        ],
     fillColor: gray
   )
+    
     }
 
   }
