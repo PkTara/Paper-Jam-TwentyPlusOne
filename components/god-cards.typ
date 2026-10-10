@@ -1,64 +1,62 @@
 
 #import "button.typ" :*
 #import "url-generator.typ" : *
+#import "theme.typ" : *
 
 #let player-card(god, number:none, direction:none, current_player:none) = {
-  stack(
-  dir: ltr,
+  block(
+    width: 100%,
+    inset: 4pt,
+    radius: 4pt,
+    fill: night.transparentize(20%),
+    stroke: 0.8pt + gold,
 
-// Character picture + Cups
-  align(center,
+  grid(
+  columns: (auto, auto, 1fr),
+  column-gutter: 6pt,
+  align: horizon,
+
+// Character picture
+  stack(
+    spacing: 2pt,
     box(
-      stroke: 1pt,
-      inset: 1pt,
-      
-      stack(
-      dir: ttb,
-      figure(
-        
-        image(
-          "./img/" + god + ".png",
-          height:  30%,
-           )
-      ),
-      [#god],
-    )
-  )
+      width: 34pt,
+      height: 34pt,
+      radius: 3pt,
+      clip: true,
+      stroke: 0.6pt + gold,
+      align(center + horizon, image(
+        "./img/" + god + ".png",
+        height: 32pt,
+        width: 32pt,
+        fit: "contain"
+      ))
+    ),
+    align(center, text(font: display-font, size: 6pt, fill: gold, god)),
   ),
 
-
-  box(
-    stroke: 1pt,
-    inset: 1pt,
-  
-  align(horizon + center,
-    stack(
-      dir: ttb,
-      [O],
-      [O],
-      [O],
-    )
-  )
+// Cups
+  stack(
+    dir: ttb,
+    spacing: 3pt,
+    ..range(3).map(_ => circle(radius: 3.5pt, stroke: 0.8pt + gold))
   ),
 
 // Player choices
-
-box(
-      stroke: 1pt,
-      inset: 1pt,
 stack(
   dir: ttb,
+  spacing: 4pt,
 
   button(
     <character-select>,
     [Stay Silent],
-    fillColor: red
+    fillColor: wine
   )
   ,
 
 if number != none {
   grid(
-  columns: 3,
+  columns: (1fr, 1fr, 1fr),
   gutter:  4pt,
   align: center,
 
@@ -76,9 +74,9 @@ if number != none {
     [
       #{number + i}
        ],
-    fillColor: gray
+    fillColor: aegean
   )
-    
+
     }
 
   }

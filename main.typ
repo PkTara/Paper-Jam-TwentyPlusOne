@@ -1,9 +1,18 @@
 
+#import "components/theme.typ" : *
+#import "components/backgrounds/olympus.typ" : *
+
 #set page(
   paper: "iso-b7",
   flipped: true,
   number-align: center,
+  margin: page-margin,
+  background: olympus-background(),
 )
+
+#set text(size: 10pt, fill: marble)
+#show heading: set text(font: display-font, fill: gold, weight: "regular")
+#show heading: set align(center)
 
 
 

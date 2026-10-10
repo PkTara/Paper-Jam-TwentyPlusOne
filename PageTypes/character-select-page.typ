@@ -4,6 +4,8 @@
   pagebreak()
   align(center)[= CHARACTER SELECT #label("character-select")]
 
+  v(6pt)
+
   god-table(greek_gods)
 
 }

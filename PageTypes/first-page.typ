@@ -1,26 +1,28 @@
 #import "../components/button.typ" : *
+#import "../components/theme.typ" : *
 
 #let first-page() = {
 
   align(
-    center,
+    center + horizon,
 
   [
-    
-    = I PROPOSE A GAME
+    #text(font: display-font, fill: gold, size: 16pt)[I PROPOSE A GAME]
 
-  = OF
+    #text(font: display-font, fill: marble, size: 12pt)[OF]
 
-  = 20 + 1!
+    #text(font: display-font, fill: gold, size: 34pt)[20 + 1!]
 
+    #v(6pt)
+
+    #button(
+      <buy-a-ticket>,
+      [START],
+      fillColor: terracotta,
+      width: 50%
+    )
   ]
 
-  )
-
-  button(
-    <buy-a-ticket>,
-    [START],
-    fillColor: red
   )
 
 }

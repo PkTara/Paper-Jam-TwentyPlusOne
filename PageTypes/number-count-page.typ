@@ -1,57 +1,57 @@
 #import "../components/components-lib.typ" : *
+#import "../components/theme.typ" : *
 
-#let four-squares(number, current_player, direction) = {
-  let places = (
-    ("Athena", top + left, 0%),
-    ("Ares", top + right, 0%),
-    ("Artemis", top + left, 30%),
-    ("Poseidon", top + right, 30%)
+// Two players stacked on one side of the table
+#let god-column(gods, number, current_player) = {
+  stack(
+    spacing: 10pt,
+    ..gods.map(god => god-square(
+      god,
+      number: if god == current_player { number },
+      active: god == current_player
+    ))
   )
-
-  for (god, quadrant, percent) in places {
-    place(
-      quadrant,
-      dy: percent
-    )[
-      #god-square(god)
-      #if god == current_player [#number]
-    ]
-  }
 }
 
 
 #let number-count-page(god, number, direction, current_player) = {
   pagebreak()
-  align(center)[=  #god #label(url-generator(
-    players_character: god,
-    current_player: current_player,
-    direction: direction,
-    number: number
-  )
-  ) 
-  ]
 
-  align(center)[
-    #image(
-    "../components/img/Dionysus.png",
-    height: 50%
-    )
-  ]
+  grid(
+    columns: (1fr, auto, 1fr),
+    align: center + top,
+
+    god-column(("Athena", "Artemis"), number, current_player),
+
+    [
+      #align(center)[=  #god #label(url-generator(
+        players_character: god,
+        current_player: current_player,
+        direction: direction,
+        number: number
+      )
+      )
+      ]
+
+      #image(
+      "../components/img/Dionysus.png",
+      height: if number == 21 { 90pt } else { 118pt }
+      )
+    ],
+
+    god-column(("Ares", "Poseidon"), number, current_player),
+  )
 
   if number == 21 {
-    align(center)[= DRINK!]
+    align(center)[
+      Uh oh, you reached 21
+
+      #text(font: display-font, fill: ember, size: 22pt)[DRINK!]
+    ]
   } else {
-    four-squares(number, current_player, direction)
-  }
-
-
-  if number != 21 {
-  place(bottom,
-    
-    player-card(god, number: number, direction: direction, current_player: current_player)
-    
+    place(bottom,
+      player-card(god, number: number, direction: direction, current_player: current_player)
     )
- 
-  } 
+  }
 
 }

@@ -1,16 +1,22 @@
 
 #import "../components/button.typ" : *
 #import "../components/page-label.typ" :*
+#import "../components/theme.typ" : *
+#import "../components/backgrounds/underworld.typ" : *
 
-#let lose-hermit-page() = {
-  pagebreak()
-  page-label("lose-hermit")
+#let lose-hermit-page() = page(background: underworld-background())[
+  #page-label("lose-hermit")
 
-  [Waaaaa, you're too boring! ]
+  #align(center + horizon)[
+    #text(font: display-font, fill: ember, size: 18pt)[Waaaaa, you're too boring!]
 
-  button(
-    <buy-a-ticket>,
-    [Go Back],
-    fillColor: blue
-  )
-}
+    #v(8pt)
+
+    #button(
+      <buy-a-ticket>,
+      [Go Back],
+      fillColor: aegean,
+      width: 50%
+    )
+  ]
+]
