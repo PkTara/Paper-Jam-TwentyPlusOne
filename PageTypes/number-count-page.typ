@@ -39,7 +39,7 @@
       )
     ],
 
-    god-column(("Ares", "Poseidon"), number, current_player),
+    god-column(("Ares", "Zeus"), number, current_player),
   )
 
   if number == 21 {
